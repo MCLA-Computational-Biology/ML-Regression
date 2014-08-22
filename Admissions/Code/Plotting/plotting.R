@@ -15,10 +15,11 @@ plotting<-function(barPlotWidths,barPlotTitles,mainCol)
      plotsAndNumbers(barPlotWidths,barPlotTitles)
      
      #Plots 2 variables
-     #twoVar(barPlotWidths,barPlotTitles,mainCol)
+     twoVar(barPlotWidths,barPlotTitles)
 }
 
 sourcePlotFunctions<-function()
 {
      source("./Code/Plotting/1D/plotsAndNumbers.R")
+     source("./Code//Plotting/2D/twoVar.R")
 }

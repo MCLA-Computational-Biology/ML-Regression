@@ -2,14 +2,14 @@ runThis<-function()
 {
      #******EDIT "./Code/Data Cleaning/customColumns.txt" BEFORE RUNNING!!!!!******
      #******"ENROLLED" COLUMN MUST BE LISTED******
+     #******FIRST COLUMN IN DATA FRAME WILL BE THE "MAIN"******
      
      ##########
      #SETTINGS#
      ##########
      stypCode<-"N"
-     barPlotTitles<-c("SAT Math","Income","Gender","Race","Major","State")
-     barPlotWidths<-c(25,10000)
-     mainCol<-"SZVADMN_SAT_MATH"
+     barPlotTitles<-c("Gender","State")
+     barPlotWidths<-NA#c(25,10000)
      ##########
      
      #Confirms "ENROLLED" is listed
