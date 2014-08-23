@@ -8,8 +8,8 @@ runThis<-function()
      #SETTINGS#
      ##########
      stypCode<-"N"
-     barPlotTitles<-c("Gender","State")
-     barPlotWidths<-NA#c(25,10000)
+     barPlotTitles<-c("SAT Math","Income","Gender","Race","Major","State")
+     barPlotWidths<-c(25,10000)
      ##########
      
      #Confirms "ENROLLED" is listed

@@ -5,7 +5,7 @@ twoVar<-function(barPlotWidths,barPlotTitles)
      #barPlotWidths<-c(25,10000)
      
      #########################################
-     print("TwoVar")
+
      #Source Functions
      sourceTwoVarFunctions()
      
@@ -50,7 +50,7 @@ twoVar<-function(barPlotWidths,barPlotTitles)
           
           #Creates new data frame from "getProb" and populates "LVL" with "ALL"
           dSet2<-getProb(dSet,mainRange)
-          return(dSet2)
+          #return(dSet2)
           dSet2$LVL<-"ALL"
           
           #Determines if column is numerical or alpha
@@ -60,95 +60,53 @@ twoVar<-function(barPlotWidths,barPlotTitles)
                secondRange<-levels(dSet[,2])
                for(j in 1:length(secondRange))
                {
+                    #Creates subset and passes to function
                     temp<-subset(dSet,dSet[,2] == secondRange[j])
-                    temp[,2]<-NULL
-                    temp<-getProb(temp,mainRange)
-                    temp$LVL<-secondRange[j]
-                    dSet2<-rbind(dSet2,temp)
+                    dSet2<-subsetBinding(temp,secondRange[j],dSet2,mainRange)
                }
-               dSet2<-subset(dSet2,dSet2[,4] >= 10)
-               #return(dSet2)
           }
           else
           {
+               #Creates range based on quantile
                secondRange<-qRange(data[,i])
-               #return(secondRange)
                for(j in 1:length(secondRange))
                {
+                    #Creates subset and passes to function
                     if(j != length(secondRange))
                          temp<-subset(dSet,dSet[,2] >= secondRange[j] & dSet[,2] < secondRange[j+1])
                     else
                          temp<-subset(dSet,dSet[,2] >= secondRange[j])
-                    temp[,2]<-NULL
-                    temp<-getProb(temp,mainRange)
-                    temp$LVL<-secondRange[j]
-                    dSet2<-rbind(dSet2,temp)
+                    dSet2<-subsetBinding(temp,secondRange[j],dSet2,mainRange)
                }
-               dSet2<-subset(dSet2,dSet2[,4] >= 10)
-               #return(dSet2)
           }
+          #Removes all rows where "OutOf" is less than 10
+          dSet2<-subset(dSet2,dSet2[,4] >= 10)
           
-          #Stop warnings
+          #Stops "NaNs" produced warning
           options(warn=-1)
           
-          k<-getPlot(dSet2,barPlotTitles[i],mainCol) + geom_smooth(method="lm")
-          ggsave(filename = paste("./Generated//Stage 2 - Training/2Var/",barPlotTitles[i],".png",sep=""),k)
+          #Creates and saves plots
+          getPlot(dSet2,barPlotTitles[i],mainCol)
+          
+          #Iterates to next title
           titleCounter<-titleCounter+1
-          #return(k)
      }
 }
 
-qRange<-function(data)
+subsetBinding<-function(temp,sRange,dSet2,mainRange)
 {
-     vec<-c()
-     for(i in 1:length(quantile(data)))
-          vec<-c(vec,quantile(data)[[i]])
-     return(vec)
-}
-
-getPlot<-function(dSet2,title,xTitle)
-{
-     p<-ggplot(dSet2, aes(Groups, Prob)) + 
-          geom_bar(stat="identity") + 
-          facet_wrap(~ LVL,scales="free") + 
-          coord_cartesian(ylim = c(0,1)) + 
-          geom_text(aes(label=OutOf), vjust=-0.25) + 
-          ggtitle(title) + 
-          ylab("Probability") + 
-          xlab(xTitle)
-     return(p)
-}
-
-getProb<-function(data,mainRange)
-{
-     newData<-data.frame(Groups=mainRange)
-     print(newData)
-     for(i in 1:nrow(newData))
-     {
-          if(i != nrow(newData))
-               temp<-subset(data,data[,1] >= newData$Groups[i] & data[,1] < newData$Groups[i+1])
-          else
-               temp<-subset(data,data[,1] >= newData$Groups[i])
-          
-          p<-(sum(temp$ENROLLED == 1)) / nrow(temp)
-          newData$Prob[i]<-p
-          
-          newData$Enrolled[i]<-sum(temp$ENROLLED == 1)
-          newData$OutOf[i]<-nrow(temp)
-     }
-     newData<-subset(newData,!is.na(newData[,2]))
-     return(newData)
-}
-
-getWidth<-function(data,numOfPlots)
-{
-     low<-min(data)
-     high<-max(data)
-     width<-round((high-low)/numOfPlots)
-     return(seq(low,high,width)[1:length(seq(low,high,width))-1])
+     #Creates data frame and binds to dSet2
+     temp[,2]<-NULL
+     temp<-getProb(temp,mainRange)
+     temp$LVL<-sRange
+     dSet2<-rbind(dSet2,temp)
+     return(dSet2)
 }
 
 sourceTwoVarFunctions<-function()
 {
      source('./Code/Plotting/2D/customGroup.R')
+     source('./Code/Plotting/2D/qRange.R')
+     source('./Code/Plotting/2D/getPlot.R')
+     source('./Code/Plotting/2D/getProb.R')
 }
