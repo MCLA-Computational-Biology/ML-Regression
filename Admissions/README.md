@@ -3,6 +3,8 @@ Admissions
 
 Make sure settings are correct before running! (Or program may freeze!)
 
+- Admissions files should be in root, in a folder named "Admissions"
+
 - "customColumns.txt" in "./Code/Data Cleaning/customColumns.txt":
   - Create list of columns, making sure each entry is on a new line
   - First line will be the "main column", x-axis for the 2Var plots
