@@ -22,5 +22,5 @@ savePlot<-function(newData,title)
 
 saveNumbers<-function(data,title)
 {
-     write.csv(data,row.names=FALSE,file=paste("./Generated/Stage 2 - Training/Numbers/",title,".csv",sep=""))
+     write.csv(data,row.names=FALSE,file=paste("./Generated/Stage 2 - Training/Barplots/Numbers/",title,".csv",sep=""))
 }

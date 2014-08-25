@@ -36,7 +36,7 @@ majorSort<-function(data)
 {
      #Stem List from: https://www.ice.gov/doclib/sevis/pdf/stem-list.pdf
      
-     #Reads stem fields stored in file
+     #Reads stem fields stored in file, edit to change
      stemList<-paste(readLines("./Code/Plotting/stemFields.txt"), sep=" ")
      
      #Stem field calculations

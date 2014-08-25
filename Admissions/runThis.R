@@ -12,27 +12,27 @@ runThis<-function()
      barPlotWidths<-c(25,10000)
      ##########
      
+     #Sets seed to 3, delete to remove
+     set.seed(3)
+     
      #Confirms "ENROLLED" is listed
      if(checkEnrolled() == FALSE)
           stop("\"ENROLLED\" NOT IN \"CUSTOMCOLUMNS.txt\"")
-     
-     #Sets seed to 3
-     set.seed(3)
      
      #Sources main functions
      sourceFunctions()
           
      #Data cleaning
-     cleaning(stypCode)
+     cleaningMain(stypCode)
      
      #Plotting
-     plotting(barPlotWidths,barPlotTitles)
+     plottingMain(barPlotWidths,barPlotTitles)
 }
 
 sourceFunctions<-function()
 {
-     source("./Code/Data Cleaning/cleaning.R")
-     source("./Code/Plotting/plotting.R")
+     source("./Code/Data Cleaning/cleaningMain.R")
+     source("./Code/Plotting/plottingmain.R")
 }
 
 checkEnrolled<-function()

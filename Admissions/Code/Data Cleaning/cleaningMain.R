@@ -1,5 +1,6 @@
-cleaning<-function(stypCode)
+cleaningMain<-function(stypCode)
 {
+     #Stage 1 Main
      #Sources cleaning functions
      sourceClean()
      

@@ -5,7 +5,7 @@ getPlot<-function(dSet2,title,xTitle)
           geom_bar(stat="identity") + 
           facet_wrap(~ LVL,scales="free") + 
           coord_cartesian(ylim = c(0,1)) + 
-          geom_text(aes(label=OutOf), vjust=-0.25) + 
+          geom_text(aes(label=OutOf), angle=-270,hjust = -.1) + 
           ggtitle(title) + 
           ylab("Probability") + 
           xlab(xTitle)

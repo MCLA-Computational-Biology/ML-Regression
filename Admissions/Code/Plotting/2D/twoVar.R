@@ -82,6 +82,8 @@ twoVar<-function(barPlotWidths,barPlotTitles)
           #Removes all rows where "OutOf" is less than 10
           dSet2<-subset(dSet2,dSet2[,4] >= 10)
           
+          write.csv(dSet2,row.names=FALSE,file=paste("./Generated//Stage 2 - Training/2Var/Numbers/",barPlotTitles[i],".csv",sep=""))
+          
           #Stops "NaNs" produced warning
           options(warn=-1)
           
