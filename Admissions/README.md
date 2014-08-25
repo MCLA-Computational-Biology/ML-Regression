@@ -31,3 +31,14 @@ Make sure settings are correct before running! (Or program may freeze!)
      barPlotWidths<-c(25,10000)
      ##########
 ```
+
+###TO RUN
+-----------------------------------------------------
+1. Copy "Admissions" folder containing "Code", "README.md", and "runThis.R" to new location.
+2. Create new folder inside "Admissions" with name "Admissions" and place admissions data inside.
+3. Open "runThis.R" in RStudio.
+4. EDIT SETTINGS IF YOU HAVE NOT DONE SO ALREADY!! (READ ABOVE!!)
+5. Source "runThis.R".
+6. Run getwd() and make sure working directory is the same as the source output text (from step 5). If not, use setwd().
+7. Run runThis() in the console and wait.
+8. A new folder named "Generated" will contain all the generated files.
